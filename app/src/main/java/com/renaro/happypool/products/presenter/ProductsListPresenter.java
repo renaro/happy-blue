@@ -10,6 +10,7 @@ import com.renaro.happypool.products.view.ProductsListView;
 import com.renaro.happypool.task.AppTask;
 import com.renaro.happypool.task.TaskExecutor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,10 +33,15 @@ public class ProductsListPresenter extends BasePresenter {
     @Override
     public void onResume() {
         super.onResume();
-        mTaskExecutor.async(new FetchTrendingProductsTask());
         mView.showLoading();
+        mTaskExecutor.async(new FetchTrendingProductsTask());
 
 
+    }
+
+    public void searchClicked(final String text) {
+        mView.showLoading();
+        mTaskExecutor.async(new FetchProductsByNameTask(text));
     }
 
     private class FetchTrendingProductsTask implements AppTask<List<Product>> {
@@ -52,6 +58,25 @@ public class ProductsListPresenter extends BasePresenter {
             } else {
                 mView.showEmptyState();
             }
+
+        }
+    }
+
+    private class FetchProductsByNameTask implements AppTask<ArrayList<Product>> {
+
+        private final String mText;
+
+        public FetchProductsByNameTask(final String text) {
+            mText = text;
+        }
+
+        @Override
+        public ArrayList<Product> execute() {
+            return mProductBO.fetchProductsByText(mText);
+        }
+
+        @Override
+        public void onPostExecute(@Nullable final ArrayList<Product> result) {
 
         }
     }

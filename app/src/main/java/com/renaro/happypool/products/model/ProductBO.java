@@ -1,5 +1,6 @@
 package com.renaro.happypool.products.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,5 +17,9 @@ public class ProductBO {
 
     public List<Product> fetchTrendingProducts() {
         return mDAO.fetchTrendingProducts();
+    }
+
+    public ArrayList<Product> fetchProductsByText(final String text) {
+        return mDAO.fetchProductsByText(text);
     }
 }

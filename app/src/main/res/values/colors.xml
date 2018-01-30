@@ -5,6 +5,7 @@
     <color name="colorAccent">#FC6621</color>
     <color name="primaryText">#212121</color>
     <color name="secondaryText">#757575</color>
+    <color name="divider">#CACACA</color>
     <color name="white">#FFFFFF</color>
     <color name="transparentWhite">#44FFFFFF</color>
     <color name="niceRed">#BB0F24</color>

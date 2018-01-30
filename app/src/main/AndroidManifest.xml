@@ -13,9 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".products.view.ProductsListActivity"/>
+        <activity android:name=".products.view.ProductsListActivity"
+            />
 
-        <activity android:name=".splash.view.SplashActivity">
+        <activity android:name=".splash.view.SplashActivity"
+                  android:theme="@style/NoTitle"
+
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

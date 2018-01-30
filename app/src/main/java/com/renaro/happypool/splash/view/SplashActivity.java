@@ -3,6 +3,8 @@ package com.renaro.happypool.splash.view;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.renaro.happypool.products.view.ProductsListActivity;
 import com.renaro.happypool.R;
@@ -26,6 +28,10 @@ public class SplashActivity extends BaseActivity<SplashPresenter> {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.splash_activity);
         findViewById(R.id.title).postDelayed(new Runnable() {
             @Override

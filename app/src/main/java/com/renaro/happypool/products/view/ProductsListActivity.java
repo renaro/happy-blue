@@ -6,7 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import com.renaro.happypool.AppAplication;
 import com.renaro.happypool.R;
@@ -26,6 +31,7 @@ public class ProductsListActivity extends BaseActivity<ProductsListPresenter> im
     protected ProductBO mProductBO;
     private View mLoading;
     private ProductsListAdapter mAdapter;
+    private EditText mSearchInput;
 
     public static Intent createIntent(final Context context) {
         Intent intent = new Intent(context, ProductsListActivity.class);
@@ -45,10 +51,17 @@ public class ProductsListActivity extends BaseActivity<ProductsListPresenter> im
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products_list);
         mLoading = findViewById(R.id.loading);
+        mSearchInput = findViewById(R.id.search_input);
         RecyclerView list = findViewById(R.id.list);
         mAdapter = new ProductsListAdapter();
         list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         list.setAdapter(mAdapter);
+        mSearchInput.setOnKeyListener(new OnSearchInputListener());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -69,5 +82,20 @@ public class ProductsListActivity extends BaseActivity<ProductsListPresenter> im
     @Override
     public void showEmptyState() {
 
+    }
+
+    private class OnSearchInputListener implements View.OnKeyListener {
+        @Override
+        public boolean onKey(final View v, final int keyCode, final KeyEvent event) {
+            if (hasCLickedEnter(keyCode, event)) {
+                mPresenter.searchClicked(mSearchInput.getText().toString());
+                return true;
+            }
+            return false;
+        }
+
+        private boolean hasCLickedEnter(final int keyCode, final KeyEvent event) {
+            return event.getAction() == KeyEvent.ACTION_DOWN && (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER);
+        }
     }
 }

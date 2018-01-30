@@ -1,6 +1,8 @@
 package com.renaro.happypool.dagger;
 
+import com.renaro.happypool.network.BackendService;
 import com.renaro.happypool.products.model.AppProductDAO;
+import com.renaro.happypool.products.model.FirebaseProductDAO;
 import com.renaro.happypool.products.model.ProductBO;
 import com.renaro.happypool.products.model.ProductDAO;
 
@@ -27,8 +29,8 @@ public class ProductsModule {
 
     @Provides
     @Singleton
-    ProductDAO provideProductDAO() {
-        return new AppProductDAO();
+    ProductDAO provideProductDAO(BackendService backendService) {
+        return new FirebaseProductDAO(backendService);
     }
 
 }

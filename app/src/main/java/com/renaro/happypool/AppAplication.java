@@ -1,6 +1,7 @@
 package com.renaro.happypool;
 
 import android.app.Application;
+import android.os.Build;
 
 import com.renaro.happypool.dagger.DaggerProductsComponent;
 import com.renaro.happypool.dagger.NetModule;
@@ -19,7 +20,7 @@ public class AppAplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mProductsComponent = DaggerProductsComponent.builder().netModule(new NetModule("www.mockedurl.com"))
+        mProductsComponent = DaggerProductsComponent.builder().netModule(new NetModule(BuildConfig.FIREBASE))
                 .productsModule(new ProductsModule()).build();
 
     }

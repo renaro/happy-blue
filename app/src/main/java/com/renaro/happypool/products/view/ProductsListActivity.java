@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -25,7 +24,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class ProductsListActivity extends BaseActivity<ProductsListPresenter> implements ProductsListView {
+public class ProductsListActivity extends BaseActivity<ProductsListPresenter> implements ProductsListView, ProductsListAdapter.OnItemClicked {
 
     @Inject
     protected ProductBO mProductBO;
@@ -54,6 +53,7 @@ public class ProductsListActivity extends BaseActivity<ProductsListPresenter> im
         mSearchInput = findViewById(R.id.search_input);
         RecyclerView list = findViewById(R.id.list);
         mAdapter = new ProductsListAdapter();
+        mAdapter.setListener(this);
         list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         list.setAdapter(mAdapter);
         mSearchInput.setOnKeyListener(new OnSearchInputListener());
@@ -84,11 +84,19 @@ public class ProductsListActivity extends BaseActivity<ProductsListPresenter> im
 
     }
 
+    @Override
+    public void onItemClicked(@NonNull final Product product) {
+        Log.d("CLICKED", "onItemClicked: "+product.getTitle());
+    }
+
     private class OnSearchInputListener implements View.OnKeyListener {
         @Override
         public boolean onKey(final View v, final int keyCode, final KeyEvent event) {
             if (hasCLickedEnter(keyCode, event)) {
                 mPresenter.searchClicked(mSearchInput.getText().toString());
+                InputMethodManager imm = (InputMethodManager) ProductsListActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
                 return true;
             }
             return false;

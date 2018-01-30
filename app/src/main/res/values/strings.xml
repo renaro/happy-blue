@@ -3,4 +3,5 @@
     <string name="splash_activity_title">HAPPY \n POOL</string>
     <string name="search_hint">Search Products</string>
     <string name="value_format">%.2f</string>
+    <string name="euro_format">%.2f EUR</string>
 </resources>

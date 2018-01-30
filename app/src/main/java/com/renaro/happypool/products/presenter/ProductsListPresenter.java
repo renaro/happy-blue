@@ -44,6 +44,14 @@ public class ProductsListPresenter extends BasePresenter {
         mTaskExecutor.async(new FetchProductsByNameTask(text));
     }
 
+    void showProductListResult(final @Nullable List<Product> result) {
+        if (result != null && !result.isEmpty()) {
+            mView.showResults(result);
+        } else {
+            mView.showEmptyState();
+        }
+    }
+
     private class FetchTrendingProductsTask implements AppTask<List<Product>> {
         @Override
         public List<Product> execute() {
@@ -53,14 +61,10 @@ public class ProductsListPresenter extends BasePresenter {
         @Override
         public void onPostExecute(@Nullable final List<Product> result) {
             mView.hideLoading();
-            if (result != null && !result.isEmpty()) {
-                mView.showResults(result);
-            } else {
-                mView.showEmptyState();
-            }
-
+            showProductListResult(result);
         }
     }
+
 
     private class FetchProductsByNameTask implements AppTask<ArrayList<Product>> {
 
@@ -77,7 +81,8 @@ public class ProductsListPresenter extends BasePresenter {
 
         @Override
         public void onPostExecute(@Nullable final ArrayList<Product> result) {
-
+            mView.hideLoading();
+            showProductListResult(result);
         }
     }
 }

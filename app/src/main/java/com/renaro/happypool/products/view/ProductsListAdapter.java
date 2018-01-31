@@ -56,7 +56,7 @@ class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapter.ViewH
     }
 
     public interface OnItemClicked {
-        void onItemClicked(@NonNull final Product product);
+        void onItemClicked(@NonNull final Product product, final View price);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -72,7 +72,7 @@ class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapter.ViewH
             itemView.setOnClickListener(new OnItemClick());
             mTitle = itemView.findViewById(R.id.title);
             mDescription = itemView.findViewById(R.id.description);
-            mPrice = itemView.findViewById(R.id.price);
+            mPrice = itemView.findViewById(R.id.buy);
             mOldPrice = itemView.findViewById(R.id.oldPrice);
             mImage = itemView.findViewById(R.id.productImage);
             mOldPrice.setTextColor(mOldPrice.getContext().getResources().getColor(R.color.niceRed));
@@ -97,7 +97,7 @@ class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapter.ViewH
             @Override
             public void onClick(final View v) {
                 if (mListener != null) {
-                    mListener.onItemClicked(mProduct);
+                    mListener.onItemClicked(mProduct, mPrice);
                 }
             }
         }

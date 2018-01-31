@@ -30,19 +30,20 @@
         android:textStyle="bold"
         android:textSize="18sp"
         tools:text="@tools:sample/lorem/random"
+        android:textColor="@color/totalyBlack"
         android:ellipsize="end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/productImage"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/price"
+        android:id="@+id/buy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:transitionName="price"
+        style="@style/TextPrice"
         android:maxLines="1"
         tools:text="US 55.00"
         app:layout_constraintStart_toEndOf="@+id/productImage"
@@ -56,7 +57,7 @@
         android:layout_marginTop="12dp"
         android:maxLines="1"
         android:textSize="13sp"
-        app:layout_constraintStart_toEndOf="@+id/price"
+        app:layout_constraintStart_toEndOf="@+id/buy"
         app:layout_constraintTop_toBottomOf="@+id/title"
         tools:text="USD 75.00"/>
 
@@ -66,12 +67,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="3dp"
         android:ellipsize="end"
         android:maxLines="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/productImage"
-        app:layout_constraintTop_toBottomOf="@+id/price"
+        app:layout_constraintTop_toBottomOf="@+id/buy"
         tools:text="@tools:sample/lorem/random"/>
 
     <View

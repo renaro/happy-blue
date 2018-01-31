@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -62,6 +62,7 @@ public class ProductsListActivity extends BaseActivity<ProductsListPresenter> im
     @Override
     public void onResume() {
         super.onResume();
+        mSearchInput.setText("");
     }
 
     @Override
@@ -85,8 +86,12 @@ public class ProductsListActivity extends BaseActivity<ProductsListPresenter> im
     }
 
     @Override
-    public void onItemClicked(@NonNull final Product product) {
-        Log.d("CLICKED", "onItemClicked: "+product.getTitle());
+    public void onItemClicked(@NonNull final Product product, final View price) {
+
+        Intent intent = ProductDetailsActivity.createIntent(product, this);
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(this, price, "price");
+        startActivity(intent, options.toBundle());
     }
 
     private class OnSearchInputListener implements View.OnKeyListener {

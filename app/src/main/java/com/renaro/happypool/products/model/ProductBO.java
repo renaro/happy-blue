@@ -37,6 +37,9 @@ public class ProductBO {
     * */
     ArrayList<Product> updateProductsOldPrices(final List<Product> products) {
         ArrayList<Product> output = new ArrayList<>();
+        if (products.isEmpty()) {
+            return output;
+        }
         for (final Product product : products) {
             if (product.getOldPrice() < product.getPrice()) {
                 output.add(new Product(product.getTitle(), product.getDescription(), product.getPrice(), 0f, product.getImages()));

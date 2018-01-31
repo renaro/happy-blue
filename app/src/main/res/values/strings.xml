@@ -4,4 +4,6 @@
     <string name="search_hint">Search Products</string>
     <string name="value_format">%.2f</string>
     <string name="euro_format">%.2f EUR</string>
+    <string name="description_label">Description</string>
+    <string name="comments_label">Comments</string>
 </resources>

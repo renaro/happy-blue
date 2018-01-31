@@ -19,6 +19,10 @@ public class FirebaseProductDAO extends ProductDAO {
         mService = backendService;
     }
 
+    /*
+    * retrieving products from a mocked server in Firebase I created.
+    * I wanted to show how I usually do REST calls
+    * */
     @Override
     public List<Product> fetchTrendingProducts() {
         ArrayList<Product> result = new ArrayList<>();
@@ -41,8 +45,22 @@ public class FirebaseProductDAO extends ProductDAO {
         return result;
     }
 
+    /*
+    * I am mocking a search returning an specific item from my server, the idea is the same than retrieving many items
+    * */
     @Override
     public ArrayList<Product> fetchProductsByText(final String text) {
-        return null;
+        ArrayList<Product> result = new ArrayList<>();
+        try {
+            List<FirebaseProduct> products = mService.getProducts().execute().body();
+            if (products != null && !products.isEmpty()) {
+                ArrayList<FirebaseProduct> randomProducts = new ArrayList<>();
+                randomProducts.add(products.get(2));
+                result.addAll(convertToProducts(randomProducts));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.renaro.happypool.R;
@@ -61,6 +63,7 @@ public class ProductDetailsActivity extends BaseActivity<ProductsDetailsPresente
         list.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
         list.setAdapter(new CommentsAdapter());
         mSlider.reSetSlideInterval(SLIDE_INTERVAL);
+        mBuyButton.setOnClickListener(new OnBuyClicked());
     }
 
     @Override
@@ -86,5 +89,12 @@ public class ProductDetailsActivity extends BaseActivity<ProductsDetailsPresente
     public void showEmptyImages() {
         //TODO SHOW AN EMPTY STATE IMAGE
         mSlider.setPageCount(0);
+    }
+
+    private class OnBuyClicked implements View.OnClickListener {
+        @Override
+        public void onClick(final View v) {
+            Toast.makeText(ProductDetailsActivity.this,"Thanks for buying!",Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -10,13 +10,13 @@ import com.renaro.happypool.products.view.ProductDetailsView;
  * Created by renarosantos1 on 31/01/18.
  */
 
-public class ProductsDetailsPresenter extends BasePresenter{
+public class ProductsDetailsPresenter extends BasePresenter {
 
     private final Product mProduct;
     private final ProductDetailsView mView;
 
     public ProductsDetailsPresenter(@NonNull final Product product, @NonNull final ProductDetailsView
-                                    view) {
+            view) {
         mView = view;
         mProduct = product;
     }
@@ -29,7 +29,7 @@ public class ProductsDetailsPresenter extends BasePresenter{
     }
 
     private void showImages() {
-        if (mProduct != null && mProduct.getImages().size() >0) {
+        if (mProduct.getImages() != null && !mProduct.getImages().isEmpty()) {
             mView.showImages(mProduct.getImages());
         } else {
             mView.showEmptyImages();

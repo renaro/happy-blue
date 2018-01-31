@@ -26,6 +26,9 @@ public class ProductBOtest {
         mProductBO = new ProductBO(mDAO);
     }
 
+    /*
+    * I want to ensure I am not showing a older price that is cheaper than my current price
+    * */
     @Test
     public void testIfOldPricesAreReplacedForZero() {
         ArrayList<Product> products = new ArrayList<>();
@@ -37,6 +40,9 @@ public class ProductBOtest {
         assertEquals(0, (int)result.get(0).getOldPrice());
     }
 
+    /*
+     * I want to ensure I am not mistaken removing the old prices when they are correct
+     * */
     @Test
     public void testIfCorrectOldPricesAreKept() {
         ArrayList<Product> products = new ArrayList<>();
